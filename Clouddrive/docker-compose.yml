@@ -1,0 +1,22 @@
+services:
+  clouddrive:
+    build: .
+    container_name: clouddrive
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-changeme123}
+      - JWT_SECRET=${JWT_SECRET:-please-change-this-to-a-random-secret-key}
+      - JWT_EXPIRE_HOURS=${JWT_EXPIRE_HOURS:-24}
+      - STORAGE_QUOTA_GB=${STORAGE_QUOTA_GB:-500}
+      - STORAGE_PATH=/app/data/storage
+      - TEMP_CHUNK_PATH=/app/data/temp_chunks
+      - DB_PATH=/app/data/db/clouddrive.db
+      - CHUNK_SIZE_BYTES=${CHUNK_SIZE_BYTES:-8388608}
+    volumes:
+      # Everything that must survive a rebuild lives under ./data on the
+      # host. This is also where you'd point a bigger disk/mount if you're
+      # actually planning to store up to 100GB files.
+      - ./data:/app/data
