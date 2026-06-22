@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudDrive</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- ======================= LOGIN SCREEN ======================= -->
+<div id="login-screen">
+  <div class="login-card">
+    <h1>☁️ CloudDrive</h1>
+    <p class="sub">Your personal storage</p>
+    <input type="text" id="login-username" placeholder="Username" autocomplete="username">
+    <div class="password-wrap">
+      <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+      <button type="button" class="password-toggle" id="password-toggle" aria-label="Show password">👁</button>
+    </div>
+    <button id="login-btn">Log in</button>
+    <div class="error-text" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ======================= APP SCREEN ======================= -->
+<div id="app-screen">
+  <div class="topbar">
+    <span class="brand">☁️ CloudDrive</span>
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Search files...">
+    </div>
+    <button class="icon-btn" id="logout-btn" title="Log out">⏻</button>
+  </div>
+
+  <div class="main-layout">
+    <div style="flex:1; min-width:0;">
+      <div class="toolbar">
+        <button class="btn btn-primary" id="upload-file-btn">⬆️ Upload file</button>
+        <button class="btn" id="new-folder-btn">📁 New folder</button>
+      </div>
+
+      <div class="quota-bar-wrap">
+        <span id="quota-text">Loading storage info...</span>
+        <div class="quota-track"><div class="quota-fill" id="quota-fill" style="width:0%"></div></div>
+      </div>
+
+      <div class="breadcrumb" id="breadcrumb"></div>
+
+      <div id="drop-zone">
+        <div class="item-grid" id="item-grid"></div>
+        <div class="empty-state" id="empty-state" style="display:none;">
+          <div class="big-icon">📭</div>
+          <div>This folder is empty</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= Transfer (progress) panel ======================= -->
+<div id="transfer-panel">
+  <div class="transfer-header">
+    <span>Transfers</span>
+    <button class="icon-btn" id="transfer-close-btn">✕</button>
+  </div>
+  <div class="transfer-list" id="transfer-list"></div>
+</div>
+
+<!-- ======================= Context menu ======================= -->
+<div class="context-menu" id="context-menu">
+  <button id="ctx-download">⬇️ Download</button>
+  <button id="ctx-delete" class="danger">🗑️ Delete</button>
+</div>
+
+<!-- ======================= New folder modal ======================= -->
+<div class="modal-overlay" id="folder-modal">
+  <div class="modal-box">
+    <h3>New folder</h3>
+    <input type="text" id="folder-name-input" placeholder="Folder name" maxlength="100">
+    <div class="modal-actions">
+      <button class="btn" id="folder-cancel-btn">Cancel</button>
+      <button class="btn btn-primary" id="folder-create-btn">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<input type="file" id="file-input" multiple>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
